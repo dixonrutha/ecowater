@@ -29,6 +29,7 @@ class OffGrid extends CI_Controller
 
         //update all customer set rank null
         $this->db->set('rank', 'NULL', false);
+        //
         //select all customer with deleivery within current month group by delivery amount desc
         $this->db->get_where('eco_deliveries',array('date_collect <='=>$from_date,'date_collect >='=>$to_date));
         $this->db->order_by('total_amount', 'DESC');
