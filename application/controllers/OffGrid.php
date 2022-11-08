@@ -35,7 +35,7 @@ class OffGrid extends CI_Controller
         $this->db->order_by('total_amount', 'DESC');
         $customer = $this->db->get('eco_offgrid_customers')->result();
 
-        //update off grid cust table with new rank for those customers
+        //update off grid cust table with new rank for those customers123
         $i = 1;
         foreach ($customer as $c) {
 
