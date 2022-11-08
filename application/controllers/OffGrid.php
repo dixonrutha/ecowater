@@ -22,7 +22,7 @@ class OffGrid extends CI_Controller
             redirect('auth/logout');
         }
     }
-// Function to update revenue rank and i already push it on git
+// Function to update revenue rank and i already push it on git again
     function custRanking() {
         $to_date = date('Y-m-d');
         $from_date=date('Y-m') . '-01';
