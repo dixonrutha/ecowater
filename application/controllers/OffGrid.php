@@ -22,19 +22,20 @@ class OffGrid extends CI_Controller
             redirect('auth/logout');
         }
     }
-// Function to update revenue rank
+// Function to update revenue rank and i already push it on git again
     function custRanking() {
         $to_date = date('Y-m-d');
         $from_date=date('Y-m') . '-01';
 
         //update all customer set rank null.
         $this->db->set('rank', 'NULL', false);
+        //
         //select all customer with deleivery within current month group by delivery amount desc
         $this->db->get_where('eco_deliveries',array('date_collect <='=>$from_date,'date_collect >='=>$to_date));
         $this->db->order_by('total_amount', 'DESC');
         $customer = $this->db->get('eco_offgrid_customers')->result();
 
-        //update off grid cust table with new rank for those customers
+        //update off grid cust table with new rank for those customers123
         $i = 1;
         foreach ($customer as $c) {
 
