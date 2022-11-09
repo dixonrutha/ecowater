@@ -271,6 +271,11 @@ class Subscribers extends CI_Controller
                 $this->session->set_flashdata('success', 'New subscriber added');
                 redirect('subscribers/newSubscriber');
             }
+
+
+
+
+
         }
         // $this->data['cards'] = $this->Subscriber_model->get_active_free_cards();
         $this->data['campus'] = $this->Subscriber_model->get_all_open_campus();

@@ -65,7 +65,7 @@ if (!empty($this->session->flashdata('success'))) {
                             class="tx-danger">*</span></strong></label>
 
                 <div class="col-md-8">
-                    <input type="text" class="form-control" placeholder="rate" name="rate"
+                    <input class="form-control" placeholder="rate" name="rate" type="number"
                            autocomplete="off">
                 </div>
             </div>
@@ -197,14 +197,14 @@ if (!empty($this->session->flashdata('success'))) {
                             <tr>
 
                                 <td>
-                                    <input type="checkbox" value="VALIDATOR" class="checkbox" name="recharge">&nbsp;&nbsp;
+                                    <input type="checkbox" value="VALIDATOR" class="checkbox" name="recharge[]">&nbsp;&nbsp;
                                     VALIDATOR
                                 </td>
                             </tr>
                             <tr>
 
                                 <td>
-                                    <input type="checkbox" value="POS" class="checkbox" name="recharge">&nbsp;&nbsp;
+                                    <input type="checkbox" value="POS" class="checkbox" name="recharge[]">&nbsp;&nbsp;
                                     POS
                                 </td>
                             </tr>
@@ -237,21 +237,21 @@ if (!empty($this->session->flashdata('success'))) {
                             <tr>
 
                                 <td>
-                                    <input type="checkbox" value="GOOD" class="checkbox" name="performance">&nbsp;&nbsp;
+                                    <input type="checkbox" value="GOOD" class="checkbox" name="performance[]">&nbsp;&nbsp;
                                     GOOD
                                 </td>
                             </tr>
                             <tr>
 
                                 <td>
-                                    <input type="checkbox" value="NORMAL" class="checkbox" name="performance">&nbsp;&nbsp;
+                                    <input type="checkbox" value="NORMAL" class="checkbox" name="performance[]">&nbsp;&nbsp;
                                     NORMAL
                                 </td>
                             </tr>
                             <tr>
 
                                 <td>
-                                    <input type="checkbox" value="BAD" class="checkbox" name="performance">&nbsp;&nbsp;
+                                    <input type="checkbox" value="BAD" class="checkbox" name="performance[]">&nbsp;&nbsp;
                                     BAD
                                 </td>
                             </tr>
@@ -284,7 +284,11 @@ if (!empty($this->session->flashdata('success'))) {
 
     $('#datepicker1').datepicker({
         showOtherMonths: true,
-        selectOtherMonths: true
+        selectOtherMonths: true,
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-M-yy',
+        minDate: 0,
     });
 
 </script>
@@ -292,7 +296,77 @@ if (!empty($this->session->flashdata('success'))) {
 
     $('#datepicker2').datepicker({
         showOtherMonths: true,
-        selectOtherMonths: true
+        selectOtherMonths: true,
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-M-yy',
+        minDate: 0,
     });
 
+</script>
+
+<script>
+    $(function () {
+        'use strict'
+
+        $('#wizard2').steps({
+            headerTag: 'h3',
+            bodyTag: 'section',
+            enableFinishButton: false,
+            autoFocus: true,
+            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
+            onStepChanging: function (event, currentIndex, newIndex) {
+                if (currentIndex < newIndex) {
+                    // Step 1 form validation
+                    if (currentIndex === 0) {
+                        var fname = $('#mobile').parsley();
+                        var lname = $('#fullname').parsley();
+                        var datepicker3 = $('#datepicker3').parsley();
+
+                        if (fname.isValid() && lname.isValid() && datepicker3.isValid) {
+                            return true;
+                        } else {
+                            fname.validate();
+                            lname.validate();
+                            datepicker3.validate();
+                        }
+                    }
+
+                    // Step 2 form validation
+                    if (currentIndex === 1) {
+                        var card_no = $('#card_no').parsley();
+                        var record_stat = $('#record_stat').parsley();
+                        var campus_code = $('#campus_code').parsley();
+                        var subscription_type = $('#subscription_type').parsley();
+
+                        if (card_no.isValid() && record_stat.isValid() && campus_code.isValid() && subscription_type.isValid()) {
+                            return true;
+                        } else {
+                            card_no.validate();
+                            record_stat.validate();
+                            campus_code.validate();
+                            subscription_type.validate();
+                        }
+                    }
+                    // Step 3 form validation
+                    if (currentIndex === 2) {
+                        var sub_cat = $('#sub_cat').parsley();
+                        if (sub_cat.isValid()) {
+                            return true;
+                        } else {
+                            sub_cat.validate();
+                        }
+                    }
+                    // Step 4 form validation
+                    if (currentIndex === 3) {
+                        return true;
+                    }
+                    // Always allow step back to the previous step even if the current step is not valid.
+                } else {
+                    return true;
+                }
+            }
+        });
+
+    });
 </script>

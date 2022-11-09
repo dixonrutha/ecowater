@@ -1,3 +1,23 @@
+<?php
+if ($this->session->flashdata('success'))
+    $success = $this->session->flashdata('success');
+if ($this->session->flashdata('error'))
+    $error = $this->session->flashdata('error');
+?>
+<div class="tx-13 mg-b-25">
+<?php if (validation_errors()): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+        <?= validation_errors(); ?>
+    </div>
+<?php endif; ?>
+<?php if (!empty($success)) { ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+        <?= $success ?>
+    </div>
+<?php } ?>
+
 <script src='<?= base_url("assets/js/jquery.mask.min.js") ?>'></script>
 <style>
     #table_td{
@@ -18,18 +38,43 @@
             <thead class="thead-dark">
             <tr>
 
-                <th style="font-size: 13px" >Name</th>
-                <th style="font-size: 13px">Category</th>
-                <th style="font-size: 13px">Performance</th>
-                <th style="font-size: 13px">Rate</th>
-                <th style="font-size: 13px">Model</th>
+                <th style="font-size: 13px" >Offer_Name</th>
                 <th style="font-size: 13px">Start Date</th>
                 <th style="font-size: 13px">End Date</th>
+                <th style="font-size: 13px">Rate</th>
+                <th style="font-size: 13px">Description</th>
+
                 <th style="font-size: 13px"></th>
             </tr>
             </thead>
             <tbody>
+            <?php
+            $i = 1;
+            foreach ($promotion as $p) {
+//                $sub_id = str_replace(array('+', '/', '='), array('-', '_', '~'), $this->encryption->encrypt($s->id));
 
+                ?>
+                <tr>
+                    <td id="table_td"><?= $p->offer_name ?></td>
+                    <td id="table_td"><?= $p->start_date ?></td>
+                    <td id="table_td"><?= $p->end_date ?></td>
+                    <td id="table_td"><?= $p->rate ?></td>
+                    <td id="table_td"><?= $p->description ?></td>
+
+<!--                    <td id="table_td" style="text-align: center">--><?//= $perf ?><!--</td>-->
+                    <td id="table_td" style="text-align: center">
+                        <div class="btn-group">
+
+
+<!--                            <a href="--><?//= base_url('subscribers/viewSubscriber/' . $sub_id) ?><!--" data-toggle="tooltip" data-placement="top" title="view/edit" class="btn btn-xs btn-outline-info" target="_blank"><span class="fa fa-search"></span></a>-->
+
+                        </div>
+                    </td>
+                </tr>
+                <?php
+                $i++;
+            }
+            ?>
             </tbody>
         </table>
     </div>

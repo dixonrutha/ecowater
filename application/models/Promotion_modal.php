@@ -7,9 +7,14 @@ class Promotion_modal extends CI_Model
         parent::__construct();
     }
 
-
     function get_all_sub_categories(){
         return $this->db->get('eco_sub_category')->result();
+
+
+    }
+
+    function get_all_promotion(){
+        return $this->db->get('eco_offer_master')->result();
 
 
     }
