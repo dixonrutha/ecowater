@@ -121,10 +121,7 @@ class Promotion extends CI_Controller {
 
 
         }
-
-
-
-
+git
 
         //modals
         //$this->data['campuses'] = $this->Subscriber_model->get_all_open_campus();
